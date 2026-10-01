@@ -12,21 +12,25 @@ export const services = [
     index: "01",
     title: "Network Engineering",
     text: "Routing, switching, VLANs, OSPF e a infraestrutura de redes corporativas.",
+    icon: "network",
   },
   {
     index: "02",
     title: "Network Security",
     text: "FortiGate, ACLs, VPN, políticas de segurança e controlo de tráfego.",
+    icon: "shield",
   },
   {
     index: "03",
     title: "Troubleshooting",
     text: "Diagnóstico de conectividade, DNS, rotas e análise de tráfego.",
+    icon: "diagnostics",
   },
   {
     index: "04",
     title: "Formação técnica",
     text: "Formação CCNA e fundamentos de redes, com laboratório e foco na prática.",
+    icon: "training",
   },
 ] as const;
 
@@ -36,24 +40,28 @@ export const projects = [
     title: "Troubleshooting e implementação em FortiGate",
     text: "Resolução de problemas de conectividade, criação de políticas de ida e volta, rotas e rotas de retorno.",
     tags: ["FortiGate", "Firewall", "Troubleshooting"],
+    icon: "firewall",
   },
   {
     index: "02",
     title: "Interligação de redes L3",
     text: "Rede de trânsito entre routers, com foco em roteamento e conectividade entre sites.",
     tags: ["Cisco IOS", "Routing", "WAN"],
+    icon: "routing",
   },
   {
     index: "03",
     title: "Segmentação de rede com VLANs",
     text: "Criação de VLANs, trunking, inter-VLAN routing e políticas de acesso.",
     tags: ["Switching", "VLAN", "ACL"],
+    icon: "vlan",
   },
   {
     index: "04",
     title: "Troubleshooting de DNS",
     text: "Análise e resolução de falhas na resolução de nomes através de um provedor.",
     tags: ["DNS", "Diagnóstico", "Redes"],
+    icon: "dns",
   },
 ] as const;
 

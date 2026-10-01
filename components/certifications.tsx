@@ -52,20 +52,24 @@ export function Certifications() {
           <h3 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] font-semibold tracking-[-0.03em]">
             Plataformas que utilizo
           </h3>
-          <ul className="mt-8 flex flex-wrap gap-x-10 gap-y-5">
+          <ul className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:grid-cols-5">
             {platforms.map((platform) => (
               <li
                 key={platform.name}
-                className="flex items-center gap-3 text-[22px] tracking-tight text-foreground sm:text-[26px]"
+                className="flex flex-col items-center text-center"
               >
-                <img
-                  src={platform.icon}
-                  alt=""
-                  width={32}
-                  height={32}
-                  className="h-8 w-auto max-h-8 max-w-20 shrink-0 object-contain"
-                />
-                {platform.name}
+                <span className="flex h-14 w-full items-center justify-center">
+                  <img
+                    src={platform.icon}
+                    alt=""
+                    width={48}
+                    height={48}
+                    className="h-12 w-auto max-h-12 max-w-[7.5rem] object-contain"
+                  />
+                </span>
+                <span className="mt-3 text-[14px] font-medium tracking-tight text-foreground">
+                  {platform.name}
+                </span>
               </li>
             ))}
           </ul>

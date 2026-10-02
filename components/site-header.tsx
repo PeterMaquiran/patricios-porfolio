@@ -17,22 +17,47 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target.id) setCurrent(visible.target.id);
-      },
-      { rootMargin: "-30% 0px -55% 0px", threshold: [0.1, 0.25, 0.5] },
-    );
+    const ids = nav.map((item) => item.href.slice(1));
 
-    nav.forEach((item) => {
-      const el = document.getElementById(item.href.slice(1));
-      if (el) observer.observe(el);
-    });
+    const update = () => {
+      const line = 96;
+      let active = "";
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= line) active = id;
+      }
 
-    return () => observer.disconnect();
+      const lastId = ids[ids.length - 1];
+      const last = lastId ? document.getElementById(lastId) : null;
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 4;
+      if (
+        atBottom &&
+        last &&
+        last.getBoundingClientRect().top < window.innerHeight * 0.65
+      ) {
+        active = lastId;
+      }
+
+      setCurrent(active);
+    };
+
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -73,6 +98,7 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "true" : undefined}
+                onClick={() => setCurrent(item.href.slice(1))}
                 className={`rounded-full px-2.5 py-1 text-[13px] transition-colors ${
                   active
                     ? "bg-[var(--badge-current-bg)] text-[var(--badge-current-fg)] shadow-[inset_0_0_0_1px_var(--badge-current-border)]"
@@ -112,17 +138,26 @@ export function SiteHeader() {
           aria-label="Secções"
         >
           <ul className="flex flex-col">
-            {nav.map((item) => (
-              <li key={item.href} className="border-t border-line">
-                <a
-                  href={item.href}
-                  className="block py-3.5 text-[28px] font-semibold tracking-tight"
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {nav.map((item) => {
+              const active = current === item.href.slice(1);
+              return (
+                <li key={item.href} className="border-t border-line">
+                  <a
+                    href={item.href}
+                    aria-current={active ? "true" : undefined}
+                    className={`block py-3.5 text-[28px] font-semibold tracking-tight ${
+                      active ? "text-foreground" : "text-muted"
+                    }`}
+                    onClick={() => {
+                      setCurrent(item.href.slice(1));
+                      setOpen(false);
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
           <a
             href="#contacto"

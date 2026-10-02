@@ -42,7 +42,7 @@ export function Hero() {
             </a>
           </div>
 
-          <dl className="mt-12 grid max-w-lg grid-cols-3 border-t border-line pt-6">
+          <dl className="mx-auto mt-12 grid max-w-lg grid-cols-3 border-t border-line pt-6 text-center lg:mx-0 lg:text-left">
             {facts.map((fact) => (
               <div key={fact.label}>
                 <dd className="text-[28px] font-semibold tracking-tight">

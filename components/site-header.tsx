@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { nav } from "@/lib/content";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -43,12 +44,12 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 flex flex-col transition-colors duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 flex flex-col border-b backdrop-blur-[48px] transition-[background-color,border-color,box-shadow] duration-300 ${
         open
-          ? "bottom-0 bg-[#f5f5f7]"
+          ? "bottom-0 border-[var(--header-border)] bg-[var(--header-bg-scrolled)]"
           : scrolled
-            ? "border-b border-black/10 bg-[#f5f5f7]/85 backdrop-blur-xl"
-            : "border-b border-transparent bg-[#f5f5f7]/60 backdrop-blur-md"
+            ? "border-[var(--header-border)] bg-[var(--header-bg-scrolled)] shadow-[var(--shadow-card)]"
+            : "border-transparent bg-[var(--header-bg)]"
       }`}
     >
       <div className="relative mx-auto flex h-14 w-full max-w-[1160px] shrink-0 items-center justify-between px-6 lg:px-8">
@@ -72,8 +73,10 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "true" : undefined}
-                className={`text-[13px] transition-colors ${
-                  active ? "text-foreground" : "text-muted hover:text-foreground"
+                className={`rounded-full px-2.5 py-1 text-[13px] transition-colors ${
+                  active
+                    ? "bg-[var(--badge-current-bg)] text-[var(--badge-current-fg)] shadow-[inset_0_0_0_1px_var(--badge-current-border)]"
+                    : "text-muted hover:text-foreground"
                 }`}
               >
                 {item.label}
@@ -82,10 +85,11 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle />
           <a
             href="#contacto"
-            className="hidden h-8 items-center rounded-full bg-ink px-3.5 text-[13px] text-white transition-colors hover:bg-[#2b2b2e] lg:inline-flex"
+            className="hidden h-8 items-center rounded-full bg-[var(--cta-bg)] px-3.5 text-[13px] text-[var(--cta-fg)] transition-colors hover:bg-[var(--cta-hover)] lg:inline-flex"
           >
             Vamos falar
           </a>
@@ -109,7 +113,7 @@ export function SiteHeader() {
         >
           <ul className="flex flex-col">
             {nav.map((item) => (
-              <li key={item.href} className="border-t border-black/10">
+              <li key={item.href} className="border-t border-line">
                 <a
                   href={item.href}
                   className="block py-3.5 text-[28px] font-semibold tracking-tight"
@@ -123,7 +127,7 @@ export function SiteHeader() {
           <a
             href="#contacto"
             onClick={() => setOpen(false)}
-            className="mt-auto inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-ink text-[15px] text-white"
+            className="mt-auto inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-[var(--cta-bg)] text-[15px] text-[var(--cta-fg)]"
           >
             Vamos falar
           </a>

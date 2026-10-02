@@ -27,18 +27,18 @@ export function Training() {
   }, [active]);
 
   return (
-    <section id="formacao" className="scroll-mt-16 bg-paper">
+    <section id="formacao" className="scroll-mt-16">
       <div className="mx-auto max-w-[1160px] px-6 py-24 lg:px-8 lg:py-32">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">
               Formação
             </p>
             <h2 className="mt-4 text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.035em]">
               Partilhar conhecimento
             </h2>
           </div>
-          <p className="text-[16px] leading-relaxed text-muted lg:col-span-5">
+          <p className="text-[16px] leading-relaxed text-secondary lg:col-span-5">
             Formador de CCNA na Velonet Academy. Fundamentos de redes, IPv4,
             subnetting, switching, routing, OSPF, ACLs e troubleshooting, com
             laboratórios práticos.
@@ -56,7 +56,7 @@ export function Training() {
                   type="button"
                   aria-label={`${shot.caption}. ${shot.detail}`}
                   onClick={() => setActive(shot)}
-                  className="group flex h-full min-h-[420px] cursor-zoom-in items-center justify-center overflow-hidden rounded-[22px] bg-[#07111c] p-6 sm:p-10"
+                  className="group flex h-full min-h-[420px] cursor-zoom-in items-center justify-center overflow-hidden rounded-3xl border border-line bg-[var(--chat-bg)] p-6 shadow-[var(--shadow-card)] backdrop-blur-[48px] sm:p-10"
                 >
                   <Image
                     src={shot.src}
@@ -77,7 +77,7 @@ export function Training() {
                 <button
                   type="button"
                   onClick={() => setActive(shot)}
-                  className="group relative block h-full min-h-[inherit] w-full cursor-zoom-in overflow-hidden rounded-[22px] bg-[#e8e8ed] text-left"
+                  className="group relative block h-full min-h-[inherit] w-full cursor-zoom-in overflow-hidden rounded-3xl border border-line text-left shadow-[var(--shadow-card)]"
                 >
                   <Image
                     src={shot.src}
@@ -86,7 +86,7 @@ export function Training() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     className={`media-zoom object-cover ${shot.position}`}
                   />
-                  <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent p-5 pt-20">
+                  <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#020617]/80 via-[#020617]/20 to-transparent p-5 pt-20">
                     <span className="block text-[14px] font-medium text-white">
                       {shot.caption}
                     </span>
@@ -104,7 +104,7 @@ export function Training() {
       {active
         ? createPortal(
             <div
-              className="fixed inset-0 z-[80] flex items-center justify-center bg-black/90 p-4 sm:p-10"
+              className="fixed inset-0 z-[80] flex items-center justify-center bg-[#020617]/88 p-4 backdrop-blur-md sm:p-10"
               role="dialog"
               aria-modal="true"
               aria-labelledby={titleId}
@@ -113,7 +113,7 @@ export function Training() {
               <button
                 ref={closeRef}
                 type="button"
-                className="absolute top-4 right-4 rounded-full bg-white px-4 py-2 text-[13px] text-ink"
+                className="absolute top-4 right-4 rounded-full bg-[var(--cta-bg)] px-4 py-2 text-[13px] text-[var(--cta-fg)] transition-colors hover:bg-[var(--cta-hover)]"
                 onClick={() => setActive(null)}
               >
                 Fechar

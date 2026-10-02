@@ -1,43 +1,128 @@
 @import "tailwindcss";
 
-:root {
+html {
+  color-scheme: light;
   --background: #f5f5f7;
   --foreground: #1d1d1f;
-  --muted: #6e6e73;
-  --accent: #0066cc;
-  --paper: #ffffff;
-  --ink: #000000;
+  --page-bg:
+    radial-gradient(circle at -10% -10%, rgba(56, 189, 248, 0.16), transparent 50%),
+    radial-gradient(circle at 110% -10%, rgba(129, 140, 248, 0.12), transparent 50%),
+    radial-gradient(circle at 50% 120%, rgba(45, 212, 190, 0.1), transparent 50%),
+    linear-gradient(180deg, #f5f5f7 0%, #eef1f6 100%);
+  --fg: #1d1d1f;
+  --fg-secondary: #424245;
+  --fg-muted: #6e6e73;
+  --fg-faint: #86868b;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-elevated: rgba(255, 255, 255, 0.92);
+  --surface-hover: rgba(255, 255, 255, 0.94);
+  --surface-chip: rgba(0, 0, 0, 0.04);
+  --border: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.16);
+  --header-bg: rgba(245, 245, 247, 0.72);
+  --header-bg-scrolled: rgba(245, 245, 247, 0.9);
+  --header-border: rgba(0, 0, 0, 0.1);
+  --glow: rgba(0, 102, 204, 0.16);
+  --card-glow: rgba(0, 102, 204, 0.12);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-inner: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --cta-bg: #000000;
+  --cta-fg: #ffffff;
+  --cta-hover: #2b2b2e;
+  --cta-ghost-bg: rgba(0, 0, 0, 0.04);
+  --cta-ghost-border: rgba(0, 0, 0, 0.1);
+  --cta-ghost-hover-bg: rgba(0, 0, 0, 0.08);
+  --cta-ghost-hover-border: rgba(0, 0, 0, 0.18);
+  --cta-ghost-fg: #1d1d1f;
+  --badge-current-bg: rgba(16, 185, 129, 0.12);
+  --badge-current-border: rgba(5, 150, 105, 0.28);
+  --badge-current-fg: #047857;
+  --selection-bg: #1d1d1f;
+  --selection-fg: #ffffff;
+  --chat-bg: rgba(255, 255, 255, 0.88);
+  --chat-bubble: rgba(0, 0, 0, 0.05);
+  --chat-input: rgba(255, 255, 255, 0.94);
+}
+
+html.dark {
+  color-scheme: dark;
+  --background: #020617;
+  --foreground: #f5f5f7;
+  --page-bg:
+    radial-gradient(circle at -10% -10%, rgba(56, 189, 248, 0.1), transparent 55%),
+    radial-gradient(circle at 110% -10%, rgba(129, 140, 248, 0.12), transparent 55%),
+    radial-gradient(circle at 50% 40%, rgba(148, 163, 184, 0.18), transparent 60%),
+    radial-gradient(circle at 50% 120%, rgba(45, 212, 190, 0.14), transparent 55%),
+    linear-gradient(145deg, #020617 0%, #020617 40%, #0f172a 100%);
+  --fg: #f5f5f7;
+  --fg-secondary: #cbd5e1;
+  --fg-muted: #94a3b8;
+  --fg-faint: #64748b;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-elevated: rgba(255, 255, 255, 0.02);
+  --surface-hover: rgba(255, 255, 255, 0.1);
+  --surface-chip: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --header-bg: rgba(22, 22, 23, 0.78);
+  --header-bg-scrolled: rgba(22, 22, 23, 0.92);
+  --header-border: rgba(255, 255, 255, 0.1);
+  --glow: rgba(59, 130, 246, 0.1);
+  --card-glow: rgba(46, 73, 101, 0.3);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --cta-bg: #ffffff;
+  --cta-fg: #000000;
+  --cta-hover: #e2e8f0;
+  --cta-ghost-bg: rgba(255, 255, 255, 0.05);
+  --cta-ghost-border: rgba(255, 255, 255, 0.1);
+  --cta-ghost-hover-bg: rgba(255, 255, 255, 0.1);
+  --cta-ghost-hover-border: rgba(255, 255, 255, 0.2);
+  --cta-ghost-fg: #ffffff;
+  --badge-current-bg: rgba(16, 185, 129, 0.1);
+  --badge-current-border: rgba(16, 185, 129, 0.2);
+  --badge-current-fg: #34d399;
+  --selection-bg: rgba(255, 255, 255, 0.2);
+  --selection-fg: #ffffff;
+  --chat-bg: rgba(11, 18, 32, 0.86);
+  --chat-bubble: rgba(255, 255, 255, 0.1);
+  --chat-input: rgba(21, 28, 44, 0.88);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-paper: var(--paper);
-  --color-ink: var(--ink);
+  --color-muted: var(--fg-muted);
+  --color-secondary: var(--fg-secondary);
+  --color-faint: var(--fg-faint);
+  --color-surface: var(--surface);
+  --color-chip: var(--surface-chip);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
+  background: var(--background);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--page-bg);
+  background-attachment: fixed;
+  color: var(--fg);
 }
 
 ::selection {
-  background: #1d1d1f;
-  color: #ffffff;
+  background: var(--selection-bg);
+  color: var(--selection-fg);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid rgba(96, 165, 250, 0.9);
   outline-offset: 3px;
+  box-shadow: 0 0 0 4px var(--glow);
 }
 
 h1,
@@ -48,6 +133,32 @@ h3 {
 
 p {
   text-wrap: pretty;
+}
+
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card), var(--shadow-inner);
+  -webkit-backdrop-filter: blur(48px);
+  backdrop-filter: blur(48px);
+}
+
+.chip {
+  background: var(--surface-chip);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+}
+
+.theme-icon-sun {
+  display: none;
+}
+
+html.dark .theme-icon-sun {
+  display: block;
+}
+
+html.dark .theme-icon-moon {
+  display: none;
 }
 
 .media-zoom {

@@ -1,6 +1,6 @@
 export function SiteFooter() {
   return (
-    <footer className="border-t border-black/10">
+    <footer className="border-t border-line">
       <div className="mx-auto flex max-w-[1160px] flex-col gap-3 px-6 py-8 sm:flex-row sm:items-center sm:justify-between lg:px-8">
         <p className="text-[13px]">
           Patrício Luís

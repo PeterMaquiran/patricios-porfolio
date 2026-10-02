@@ -35,7 +35,7 @@ export function Certifications() {
                   className="object-contain"
                 />
               </div>
-              <p className="mt-6 text-center text-[15px] font-medium tracking-tight">
+              <p className="mt-6 text-center text-xl font-medium tracking-tight">
                 {item.name}
               </p>
               <p className="mt-1 text-center text-[13px] text-muted">
@@ -67,7 +67,7 @@ export function Certifications() {
                     className="h-12 w-auto max-h-12 max-w-[7.5rem] object-contain"
                   />
                 </span>
-                <span className="mt-3 text-[14px] font-medium tracking-tight text-foreground">
+                <span className="mt-3 text-xl font-medium tracking-tight text-foreground">
                   {platform.name}
                 </span>
               </li>

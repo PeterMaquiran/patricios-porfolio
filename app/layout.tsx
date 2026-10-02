@@ -28,7 +28,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#020617",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f5f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#020617" },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -36,11 +39,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="pt"
       suppressHydrationWarning
-      className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans text-foreground">
         <Script id="theme-init" strategy="beforeInteractive">
-          {`(function(){try{var dark=localStorage.getItem("theme")!=="light";document.documentElement.classList.toggle("dark",dark);var meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.setAttribute("content",dark?"#020617":"#f5f5f7");}catch(e){}})();`}
+          {`(function(){try{var stored=localStorage.getItem("theme");var dark=stored==="dark"||(stored!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",dark);if(stored==="light"||stored==="dark"){var color=dark?"#020617":"#f5f5f7";var metas=document.querySelectorAll('meta[name="theme-color"]');for(var i=0;i<metas.length;i++){if(i===0){metas[i].setAttribute("content",color);metas[i].removeAttribute("media");}else{metas[i].remove();}}}}catch(e){}})();`}
         </Script>
         {children}
       </body>

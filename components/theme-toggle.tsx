@@ -4,25 +4,58 @@ import { useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
+const themeColor: Record<Theme, string> = {
+  light: "#f5f5f7",
+  dark: "#020617",
+};
+
+function storedTheme(): Theme | null {
+  const stored = localStorage.getItem("theme");
+  return stored === "light" || stored === "dark" ? stored : null;
+}
+
+function systemTheme(): Theme {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
 function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle("dark", theme === "dark");
-  document
-    .querySelector('meta[name="theme-color"]')
-    ?.setAttribute("content", theme === "dark" ? "#020617" : "#f5f5f7");
   localStorage.setItem("theme", theme);
+  const metas = document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]');
+  metas.forEach((meta, index) => {
+    if (index === 0) {
+      meta.setAttribute("content", themeColor[theme]);
+      meta.removeAttribute("media");
+    } else {
+      meta.remove();
+    }
+  });
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light");
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+    function sync() {
+      const stored = storedTheme();
+      if (stored) {
+        setTheme(stored);
+        return;
+      }
+      const next = systemTheme();
+      document.documentElement.classList.toggle("dark", next === "dark");
+      setTheme(next);
+    }
+
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
   }, []);
 
   function toggle() {
-    const next: Theme = document.documentElement.classList.contains("dark")
-      ? "light"
-      : "dark";
+    const next: Theme = document.documentElement.classList.contains("dark") ? "light" : "dark";
     applyTheme(next);
     setTheme(next);
   }

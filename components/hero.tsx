@@ -8,7 +8,7 @@ const facts = [
 
 export function Hero() {
   return (
-    <section id="top" className="px-6 pt-14 lg:px-8">
+    <section id="top" className="overflow-x-clip px-6 pt-14 lg:px-8">
       <div className="mx-auto grid min-h-[calc(100svh-3.5rem)] max-w-[1160px] items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-20">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">

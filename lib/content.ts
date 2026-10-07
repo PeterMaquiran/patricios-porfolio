@@ -196,9 +196,9 @@ export const gallery = [
 ] as const;
 
 export const contact = {
-  email: "patricio.luis@email.com",
-  linkedin: "https://linkedin.com/in/patricio-luis",
-  linkedinLabel: "linkedin.com/in/patricio-luis",
-  phone: "+244 9XX XXX XXX",
+  email: "patricioluis69@gmail.com",
+  linkedin: "https://www.linkedin.com/in/patricioluis/",
+  linkedinLabel: "linkedin.com/in/patricioluis",
+  phone: "+244 923 831 243",
   location: "Angola",
 } as const;

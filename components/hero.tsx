@@ -54,7 +54,7 @@ export function Hero() {
           </dl>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[540px] lg:mx-0 lg:max-w-none lg:justify-self-end">
+        <div className="relative isolate mx-auto w-full max-w-[540px] lg:mx-0 lg:max-w-none lg:justify-self-end">
           <div
             aria-hidden
             className="pointer-events-none absolute -inset-8 -z-10 rounded-full bg-[radial-gradient(circle,var(--card-glow),transparent_70%)] blur-3xl"
